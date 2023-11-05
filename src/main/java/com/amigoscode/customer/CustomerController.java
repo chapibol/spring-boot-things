@@ -1,13 +1,12 @@
 package com.amigoscode.customer;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController()
+@RestController
+@RequestMapping("/api/v1/customer")
 public class CustomerController {
 
     private final CustomerSvc customerSvc;
@@ -16,13 +15,18 @@ public class CustomerController {
         this.customerSvc = customerSvc;
     }
 
-    @GetMapping("/api/v1/customer")
+    @GetMapping()
     public ResponseEntity<List<Customer>> allCustomers(){
         return ResponseEntity.ok(customerSvc.getAllCustomers());
     }
 
-    @GetMapping("/api/v1/customer/{customerId}")
+    @GetMapping("{customerId}")
     public ResponseEntity<Customer> getCustomer(@PathVariable Integer customerId){
         return ResponseEntity.ok(customerSvc.getCustomerById(customerId));
+    }
+
+    @PostMapping
+    public void registerCustomer(@RequestBody CustomerRegistrationRequest customerRegistrationRequest){
+        customerSvc.addCustomer(customerRegistrationRequest);
     }
 }

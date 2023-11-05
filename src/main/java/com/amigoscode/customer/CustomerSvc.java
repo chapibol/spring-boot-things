@@ -1,6 +1,7 @@
 package com.amigoscode.customer;
 
-import com.amigoscode.exception.ResourceNotFound;
+import com.amigoscode.exception.DuplicateResourceException;
+import com.amigoscode.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,19 @@ public class CustomerSvc {
 
     public Customer getCustomerById(Integer id){
         return customerDao.getCustomerById(id)
-                .orElseThrow(() -> new ResourceNotFound("customer %s could not be found.".formatted(id)));
+                .orElseThrow(() -> new ResourceNotFoundException("customer %s could not be found.".formatted(id)));
     }
+
+    public void addCustomer(CustomerRegistrationRequest customerRegistrationRequest){
+        String email = customerRegistrationRequest.email();
+        if(customerDao.existsPersonWithEmail(email)){
+            throw new DuplicateResourceException("email already taken");
+        }
+        customerDao.insertCustomer(toCustomer(customerRegistrationRequest));
+    }
+
+    protected Customer toCustomer(CustomerRegistrationRequest customerRegistrationRequest){
+        return new Customer(customerRegistrationRequest.name(), customerRegistrationRequest.email(), customerRegistrationRequest.age());
+    }
+
 }
