@@ -32,6 +32,14 @@ public class CustomerSvc {
         customerDao.insertCustomer(toCustomer(customerRegistrationRequest));
     }
 
+    public void deleteCustomer(Integer customerId){
+        try{
+            customerDao.deleteCustomerById(customerId);
+        }catch (Exception e){
+            throw new ResourceNotFoundException("customer with %s could not be found".formatted(customerId));
+        }
+    }
+
     protected Customer toCustomer(CustomerRegistrationRequest customerRegistrationRequest){
         return new Customer(customerRegistrationRequest.name(), customerRegistrationRequest.email(), customerRegistrationRequest.age());
     }

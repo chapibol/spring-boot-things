@@ -35,6 +35,11 @@ public class CustomerListDataAccessSvc implements CustomerDao {
     }
 
     @Override
+    public void deleteCustomerById(Integer id) {
+        customers.removeIf(customer -> customer.getId().equals(id));
+    }
+
+    @Override
     public boolean existsPersonWithEmail(String email) {
         return customers.stream().anyMatch(c -> c.getEmail().equals(email));
     }

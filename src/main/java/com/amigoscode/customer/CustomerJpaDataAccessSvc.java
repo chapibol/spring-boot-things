@@ -29,6 +29,11 @@ public class CustomerJpaDataAccessSvc implements CustomerDao {
     }
 
     @Override
+    public void deleteCustomerById(Integer id) {
+        customerRepository.deleteById(id);
+    }
+
+    @Override
     public boolean existsPersonWithEmail(String email) {
         return customerRepository.existsCustomerByEmail(email);
     }
