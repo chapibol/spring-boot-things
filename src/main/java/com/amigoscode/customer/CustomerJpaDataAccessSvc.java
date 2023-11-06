@@ -34,6 +34,11 @@ public class CustomerJpaDataAccessSvc implements CustomerDao {
     }
 
     @Override
+    public boolean existsCustomerById(Integer id) {
+        return customerRepository.existsCustomerById(id);
+    }
+
+    @Override
     public boolean existsPersonWithEmail(String email) {
         return customerRepository.existsCustomerByEmail(email);
     }

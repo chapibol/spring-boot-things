@@ -33,15 +33,14 @@ public class CustomerSvc {
     }
 
     public void deleteCustomer(Integer customerId){
-        try{
+        if(customerDao.existsCustomerById(customerId)){
             customerDao.deleteCustomerById(customerId);
-        }catch (Exception e){
-            throw new ResourceNotFoundException("customer with %s could not be found".formatted(customerId));
+        }else{
+            throw new ResourceNotFoundException("customer with id %s could not be found.".formatted(customerId));
         }
     }
 
     protected Customer toCustomer(CustomerRegistrationRequest customerRegistrationRequest){
         return new Customer(customerRegistrationRequest.name(), customerRegistrationRequest.email(), customerRegistrationRequest.age());
     }
-
 }

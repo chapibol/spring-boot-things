@@ -13,5 +13,7 @@ public interface CustomerDao {
 
     void deleteCustomerById(Integer id);
 
+    boolean existsCustomerById(Integer id);
+
     boolean existsPersonWithEmail(String email);
 }
