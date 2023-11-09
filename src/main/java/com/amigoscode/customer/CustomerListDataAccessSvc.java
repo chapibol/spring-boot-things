@@ -48,4 +48,9 @@ public class CustomerListDataAccessSvc implements CustomerDao {
     public boolean existsPersonWithEmail(String email) {
         return customers.stream().anyMatch(c -> c.getEmail().equals(email));
     }
+
+    @Override
+    public void updateCustomer(Customer updatedCustomer) {
+        System.out.println("sike, not implementing this");
+    }
 }

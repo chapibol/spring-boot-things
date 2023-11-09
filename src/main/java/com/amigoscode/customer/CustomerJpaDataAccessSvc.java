@@ -42,4 +42,9 @@ public class CustomerJpaDataAccessSvc implements CustomerDao {
     public boolean existsPersonWithEmail(String email) {
         return customerRepository.existsCustomerByEmail(email);
     }
+
+    @Override
+    public void updateCustomer(Customer updatedCustomer) {
+        customerRepository.save(updatedCustomer);
+    }
 }
