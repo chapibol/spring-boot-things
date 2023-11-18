@@ -20,7 +20,7 @@ public class CustomerSvc {
         return customerDao.getAllCustomers();
     }
 
-    public Customer getCustomerById(Integer id){
+    public Customer getCustomerById(Long id){
         return customerDao.getCustomerById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("customer %s could not be found.".formatted(id)));
     }
@@ -33,7 +33,7 @@ public class CustomerSvc {
         customerDao.insertCustomer(toCustomer(customerRegistrationRequest));
     }
 
-    public void deleteCustomer(Integer customerId){
+    public void deleteCustomer(Long customerId){
         if(customerDao.existsCustomerById(customerId)){
             customerDao.deleteCustomerById(customerId);
         }else{
@@ -41,7 +41,7 @@ public class CustomerSvc {
         }
     }
 
-    public void updateCustomer(Integer customerId, CustomerUpdateRequest customerUpdateRequest){
+    public void updateCustomer(Long customerId, CustomerUpdateRequest customerUpdateRequest){
         Customer customerToUpdate = this.getCustomerById(customerId);
         if(isCustomerDataValid(customerToUpdate, customerUpdateRequest)){
             customerDao.updateCustomer(updateCustomer(customerToUpdate, customerUpdateRequest));

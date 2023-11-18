@@ -19,7 +19,7 @@ public class CustomerJpaDataAccessSvc implements CustomerDao {
     }
 
     @Override
-    public Optional<Customer> getCustomerById(Integer id) {
+    public Optional<Customer> getCustomerById(Long id) {
         return customerRepository.findById(id);
     }
 
@@ -29,12 +29,12 @@ public class CustomerJpaDataAccessSvc implements CustomerDao {
     }
 
     @Override
-    public void deleteCustomerById(Integer id) {
+    public void deleteCustomerById(Long id) {
         customerRepository.deleteById(id);
     }
 
     @Override
-    public boolean existsCustomerById(Integer id) {
+    public boolean existsCustomerById(Long id) {
         return customerRepository.existsCustomerById(id);
     }
 

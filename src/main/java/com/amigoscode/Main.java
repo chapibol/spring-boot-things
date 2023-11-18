@@ -2,6 +2,7 @@ package com.amigoscode;
 
 import com.amigoscode.customer.Customer;
 import com.amigoscode.customer.CustomerRepository;
+import com.github.javafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,9 +20,10 @@ public class Main {
     @Bean
     public CommandLineRunner runner(CustomerRepository customerRepository) {
         return args -> {
-            Customer alex = new Customer("Alex", "alex@gmail.com", 21);
-            Customer jamila = new Customer("Jamila", "jamila@gmail.com", 19);
-            customerRepository.saveAll(List.of(alex, jamila));
+            Faker faker = new Faker();
+            Customer customerOne = new Customer(faker.name().firstName(), faker.name().lastName() + "@gmail.com", faker.number().numberBetween(18, 45));
+            Customer customerTwo = new Customer(faker.name().firstName(), faker.name().lastName() + "@gmail.com", faker.number().numberBetween(18, 45));
+            customerRepository.saveAll(List.of(customerOne, customerTwo));
         };
     }
 }

@@ -21,7 +21,7 @@ public class CustomerController {
     }
 
     @GetMapping("{customerId}")
-    public ResponseEntity<Customer> getCustomer(@PathVariable Integer customerId){
+    public ResponseEntity<Customer> getCustomer(@PathVariable Long customerId){
         return ResponseEntity.ok(customerSvc.getCustomerById(customerId));
     }
 
@@ -31,12 +31,12 @@ public class CustomerController {
     }
 
     @DeleteMapping("{customerId}")
-    public void deleteCustomer(@PathVariable Integer customerId){
+    public void deleteCustomer(@PathVariable Long customerId){
         customerSvc.deleteCustomer(customerId);
     }
 
     @PutMapping("{customerId}")
-    public void updateCustomer(@PathVariable Integer customerId, @RequestBody CustomerUpdateRequest customerUpdateRequest){
+    public void updateCustomer(@PathVariable Long customerId, @RequestBody CustomerUpdateRequest customerUpdateRequest){
         customerSvc.updateCustomer(customerId, customerUpdateRequest);
     }
 }

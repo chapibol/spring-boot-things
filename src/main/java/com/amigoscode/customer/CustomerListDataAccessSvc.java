@@ -13,9 +13,9 @@ public class CustomerListDataAccessSvc implements CustomerDao {
 
     static {
         customers = new ArrayList<>();
-        Customer alex = new Customer(1, "Alex", "alex@gmail.com", 21);
+        Customer alex = new Customer(1L, "Alex", "alex@gmail.com", 21);
         customers.add(alex);
-        Customer jamila = new Customer(2, "Jamila", "jamila@gmail.com", 19);
+        Customer jamila = new Customer(2L, "Jamila", "jamila@gmail.com", 19);
         customers.add(jamila);
     }
 
@@ -25,7 +25,7 @@ public class CustomerListDataAccessSvc implements CustomerDao {
     }
 
     @Override
-    public Optional<Customer> getCustomerById(Integer id) {
+    public Optional<Customer> getCustomerById(Long id) {
         return customers.stream().filter(customer -> customer.getId().equals(id)).findFirst();
     }
 
@@ -35,12 +35,12 @@ public class CustomerListDataAccessSvc implements CustomerDao {
     }
 
     @Override
-    public void deleteCustomerById(Integer id) {
+    public void deleteCustomerById(Long id) {
         customers.removeIf(customer -> customer.getId().equals(id));
     }
 
     @Override
-    public boolean existsCustomerById(Integer id) {
+    public boolean existsCustomerById(Long id) {
         return customers.stream().anyMatch(c -> c.getId().equals(id));
     }
 
