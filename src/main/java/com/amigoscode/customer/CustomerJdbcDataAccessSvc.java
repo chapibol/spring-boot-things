@@ -1,6 +1,5 @@
 package com.amigoscode.customer;
 
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -46,21 +45,43 @@ public class CustomerJdbcDataAccessSvc implements CustomerDao{
 
     @Override
     public void updateCustomer(Customer updatedCustomer) {
-
+        var sql = """
+                UPDATE Customer
+                SET name = coalesce(?, name),
+                    email = coalesce(?, email),
+                    age = coalesce(?, age)
+                WHERE id = ?
+                """;
+        jdbcTemplate.update(sql,updatedCustomer.getName(), updatedCustomer.getEmail(), updatedCustomer.getAge(), updatedCustomer.getId());
     }
 
-    @Override// TODO Implement
+    @Override
     public void deleteCustomerById(Long id) {
-
+        var sql = """
+                DELETE
+                FROM Customer
+                WHERE id = ?
+                """;
+        jdbcTemplate.update(sql, id);
     }
 
-    @Override// TODO Implement
+    @Override
     public boolean existsCustomerById(Long id) {
-        return false;
+        var sql = """
+                SELECT count(id)
+                FROM Customer
+                WHERE id = ?
+                """;
+        return jdbcTemplate.queryForObject(sql, Integer.class, id) > 0;
     }
 
-    @Override // TODO Implement this also
+    @Override
     public boolean existsPersonWithEmail(String email) {
-        return false;
+        var sql = """
+                SELECT count(id)
+                FROM Customer
+                WHERE email = ?
+                """;
+        return jdbcTemplate.queryForObject(sql, Integer.class, email) > 0;
     }
 }
