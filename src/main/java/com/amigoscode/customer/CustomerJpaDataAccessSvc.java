@@ -13,6 +13,7 @@ public class CustomerJpaDataAccessSvc implements CustomerDao {
     public CustomerJpaDataAccessSvc(CustomerRepository customerRepository){
         this.customerRepository = customerRepository;
     }
+
     @Override
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();

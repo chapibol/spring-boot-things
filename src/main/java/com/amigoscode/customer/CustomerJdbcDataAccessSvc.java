@@ -52,7 +52,7 @@ public class CustomerJdbcDataAccessSvc implements CustomerDao{
                     age = coalesce(?, age)
                 WHERE id = ?
                 """;
-        jdbcTemplate.update(sql,updatedCustomer.getName(), updatedCustomer.getEmail(), updatedCustomer.getAge(), updatedCustomer.getId());
+        jdbcTemplate.update(sql, updatedCustomer.getName(), updatedCustomer.getEmail(), updatedCustomer.getAge(), updatedCustomer.getId());
     }
 
     @Override
