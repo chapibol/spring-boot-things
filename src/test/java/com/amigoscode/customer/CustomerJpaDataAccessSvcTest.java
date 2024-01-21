@@ -1,5 +1,6 @@
 package com.amigoscode.customer;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,8 @@ import static org.mockito.Mockito.verify;
 
 
 class CustomerJpaDataAccessSvcTest {
+
+    protected static final Faker FAKER = new Faker();
 
     @Mock
     private CustomerRepository customerRepository;
@@ -53,21 +56,42 @@ class CustomerJpaDataAccessSvcTest {
 
     @Test
     void insertCustomer() {
+        Customer customer = new Customer("Lionel", FAKER.internet().safeEmailAddress(), 25);
+        svcToTest.insertCustomer(customer);
+
+        verify(customerRepository).save(customer);
     }
 
     @Test
     void deleteCustomerById() {
+        Long id = 2L;
+        svcToTest.deleteCustomerById(id);
+
+        verify(customerRepository).deleteById(id);
     }
 
     @Test
     void existsCustomerById() {
+        Long id = 3L;
+        svcToTest.existsCustomerById(id);
+
+        verify(customerRepository).existsCustomerById(id);
     }
 
     @Test
     void existsPersonWithEmail() {
+        String email = FAKER.internet().safeEmailAddress();
+
+        svcToTest.existsPersonWithEmail(email);
+
+        verify(customerRepository).existsCustomerByEmail(email);
     }
 
     @Test
     void updateCustomer() {
+        Customer customer = new Customer("Lionel", FAKER.internet().safeEmailAddress(), 25);
+        svcToTest.updateCustomer(customer);
+
+        verify(customerRepository).save(customer);
     }
 }
