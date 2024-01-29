@@ -225,7 +225,7 @@ class CustomerSvcTest {
     }
 
     @Test
-    void toCustomer() {
+    void testToCustomer() {
         CustomerRegistrationRequest customerRegistrationRequest = new CustomerRegistrationRequest(
                 FAKER.name().fullName(), FAKER.internet().safeEmailAddress(), 22);
 
