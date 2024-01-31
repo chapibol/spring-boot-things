@@ -29,9 +29,7 @@ class CustomerJdbcDataAccessSvcTest extends AbstractTestcontainersTestConfig {
         );
 
         serviceToTest.insertCustomer(customerOne);
-
         List<Customer> allCustomers = serviceToTest.getAllCustomers();
-
         assertThat(allCustomers).isNotEmpty();
     }
 
@@ -71,6 +69,7 @@ class CustomerJdbcDataAccessSvcTest extends AbstractTestcontainersTestConfig {
                 uniqueEmail,
                 22
         );
+
         serviceToTest.insertCustomer(ogCustomer);
         Long customerId = getCustomerIdFromUniqueEmail(uniqueEmail);
         Customer customerToUpdate = serviceToTest.getCustomerById(customerId).orElseThrow();
@@ -211,7 +210,6 @@ class CustomerJdbcDataAccessSvcTest extends AbstractTestcontainersTestConfig {
                 .orElseThrow();
     }
 
-
     @Test
     void existsCustomerById() {
         String uniqueEmail = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
@@ -243,6 +241,4 @@ class CustomerJdbcDataAccessSvcTest extends AbstractTestcontainersTestConfig {
         serviceToTest.deleteCustomerById(customerId);
         assertThat(serviceToTest.getCustomerById(customerId)).isEmpty();
     }
-
-
 }
