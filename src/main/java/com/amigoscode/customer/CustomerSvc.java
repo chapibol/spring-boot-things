@@ -34,11 +34,10 @@ public class CustomerSvc {
     }
 
     public void deleteCustomer(Long customerId){
-        if(customerDao.existsCustomerById(customerId)){
+        if(customerDao.existsCustomerById(customerId))
             customerDao.deleteCustomerById(customerId);
-        }else{
+        else
             throw new ResourceNotFoundException("customer with id %s could not be found.".formatted(customerId));
-        }
     }
 
     public void updateCustomer(Long customerId, CustomerUpdateRequest customerUpdateRequest){
@@ -50,7 +49,7 @@ public class CustomerSvc {
         }
     }
 
-    protected Customer updateCustomer(Customer customerToUpdate, CustomerUpdateRequest customerUpdateRequest){
+    private Customer updateCustomer(Customer customerToUpdate, CustomerUpdateRequest customerUpdateRequest){
         customerUpdateRequest.name()
                 .filter(name -> !name.equals(customerToUpdate.getName()))
                 .ifPresent(customerToUpdate::setName);
@@ -69,16 +68,15 @@ public class CustomerSvc {
 
     /**
      * Method that will check that at least one of the fields provided is different from the customer to update object
-     * @param customerToUpdate the customer to update
-     * @param customerUpdateRequest the data about to customer to update
+     * @param currentCustomer the customer to update
+     * @param updatedCustomerData the data about to customer to update
      * @return true if at least one piece of data is different, if no data is provided at all, that counts as not changes or if
      * data is provided, but it is not different from current data then this is also false.
      */
-
-    public boolean isCustomerDataValid(Customer customerToUpdate, CustomerUpdateRequest customerUpdateRequest){
-        return customerUpdateRequest.name().filter(name -> !customerToUpdate.getName().equals(name)).isPresent() ||
-               customerUpdateRequest.email().filter(email -> !customerToUpdate.getEmail().equals(email)).isPresent() ||
-        customerUpdateRequest.age().filter(age -> !customerToUpdate.getAge().equals(age)).isPresent();
+    public boolean isCustomerDataValid(Customer currentCustomer, CustomerUpdateRequest updatedCustomerData){
+        return updatedCustomerData.name().filter(updatedName -> !currentCustomer.getName().equals(updatedName)).isPresent() ||
+               updatedCustomerData.email().filter(updatedEmail -> !currentCustomer.getEmail().equals(updatedEmail)).isPresent() ||
+               updatedCustomerData.age().filter(updatedAge -> !currentCustomer.getAge().equals(updatedAge)).isPresent();
     }
 
     protected Customer toCustomer(CustomerRegistrationRequest customerRegistrationRequest){
