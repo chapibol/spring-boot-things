@@ -9,12 +9,17 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.amigoscode</groupId>
-	<artifactId>spring-boot-example</artifactId>
+	<artifactId>amigoscode-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<organization>
+		<name>amigoscode</name>
+		<url>https://amigoscode.com</url>
+	</organization>
 	<name>spring-boot-example</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>21</java.version>
+		<docker.username>chapibol</docker.username>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -142,6 +147,34 @@
 						<exclude>**/*IntegrationTest.java</exclude>
 						<exclude>**/*IT.java</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.4.1</version>
+				<configuration>
+					<from>
+						<image>eclipse-temurin:21</image>
+						<platforms>
+							<platform>
+								<architecture>arm64</architecture>
+								<os>linux</os>
+							</platform>
+							<platform>
+								<architecture>amd64</architecture>
+								<os>linux</os>
+							</platform>
+						</platforms>
+					</from>
+					<to>
+						<image>docker.io/${docker.username}/${project.artifactId}:${project.version}</image>
+						<tags>
+							<tag>
+
+							</tag>
+						</tags>
+					</to>
 				</configuration>
 			</plugin>
 		</plugins>
