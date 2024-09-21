@@ -36,7 +36,7 @@ public class CustomerJdbcDataAccessSvc implements CustomerDao{
     @Override
     public void insertCustomer(Customer customer) {
         var sql = """
-                INSERT INTO customer(name, email, age)
+                INSERT INTO Customer(name, email, age)
                 VALUES(?, ?, ?)
                 """;
         int numRowsAffected = jdbcTemplate.update(sql, customer.getName(), customer.getEmail(), customer.getAge());
