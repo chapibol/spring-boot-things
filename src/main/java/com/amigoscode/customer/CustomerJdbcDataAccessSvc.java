@@ -39,8 +39,7 @@ public class CustomerJdbcDataAccessSvc implements CustomerDao{
                 INSERT INTO Customer(name, email, age)
                 VALUES(?, ?, ?)
                 """;
-        int numRowsAffected = jdbcTemplate.update(sql, customer.getName(), customer.getEmail(), customer.getAge());
-        System.out.println("jdbcTemplate.update = " + numRowsAffected);
+        jdbcTemplate.update(sql, customer.getName(), customer.getEmail(), customer.getAge());
     }
 
     @Override
