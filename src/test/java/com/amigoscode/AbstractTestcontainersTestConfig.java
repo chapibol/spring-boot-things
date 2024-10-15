@@ -24,7 +24,7 @@ public abstract class AbstractTestcontainersTestConfig {
                         postgreSQLContainer.getUsername(),
                         postgreSQLContainer.getPassword())
                 .load();
-        flyway.migrate();
+        flyway.migrate();// this is applying migrations to the newly created testcontainers database
     }
 
     @Container

@@ -47,8 +47,7 @@ class CustomerSvcTest {
     void getCustomerById() {
         Long id = 1L;
         Customer ogCustomer = new Customer(id, "John Doe", "johndoe@example.com", 25);
-        when(customerDao.getCustomerById(id))
-                .thenReturn(Optional.of(ogCustomer));
+        when(customerDao.getCustomerById(id)).thenReturn(Optional.of(ogCustomer));
         Customer customer = svcToTest.getCustomerById(id);
         verify(customerDao).getCustomerById(id);
         assertThat(customer).isEqualTo(ogCustomer);

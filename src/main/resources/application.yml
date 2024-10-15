@@ -12,7 +12,7 @@ spring:
     password: password
   jpa:
     hibernate:
-      ddl-auto: validate #to use flyway ddl-auto has to be turned off
+      ddl-auto: validate #to use flyway ddl-auto has to be turned off. This just validates the db entities in spring-boot match the db schema
     properties:
       hibernate:
         format_sql: true
